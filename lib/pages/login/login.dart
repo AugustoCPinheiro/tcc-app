@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:tcc/pages/login/loginBloc.dart';
 import 'package:tcc/util/validation/email_validator.dart';
 import 'package:tcc/util/validation/password_validator.dart';
 
@@ -12,6 +12,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final LoginBloc _bloc = LoginBloc();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -27,13 +28,13 @@ class _LoginState extends State<Login> {
               ),
               TextFormField(
                 validator: PasswordValidator().validate,
-                inputFormatters: [
-                  TextInputFormatter.withFunction((oldValue, newValue) => null)
-                ],
               ),
               ElevatedButton(
                   onPressed: () {
-                    if (_formKey.currentState.validate()) {}
+                    if (_formKey.currentState.validate()) {
+                      _bloc.saveUser();
+                      Navigator.pushNamed(context, "Home");
+                    }
                   },
                   child: Text(""))
             ],

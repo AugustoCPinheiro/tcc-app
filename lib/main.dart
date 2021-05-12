@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tcc/pages/home/home.dart';
-import 'package:tcc/pages/login/login.dart';
+import 'package:tcc/navigation/app_navigator.dart';
 import 'package:tcc/util/theme/custom_theme.dart';
 
 void main() {
@@ -14,16 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: CustomTheme.getTheme(),
-      //Adicionar lógica para trocar entrada dependendo do login
-      home: SafeArea(
-          child: Navigator(
-        // initialRoute: true ? "home" : "login",
-        pages: [
-          MaterialPage(key: ValueKey("home"), child: Home()),
-          MaterialPage(key: ValueKey("login"), child: Login())
-        ],
-        onPopPage: (route, result) => route.didPop(result),
-      )),
+      home: SafeArea(child: AppNavigator()),
     );
   }
 }

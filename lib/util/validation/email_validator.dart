@@ -1,4 +1,4 @@
-import 'package:tcc/util/validation/validators.dart';
+import 'package:tcc/util/validation/validator.dart';
 
 class EmailValidator extends Validator {
   @override

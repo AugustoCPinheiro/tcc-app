@@ -13,12 +13,12 @@ class PatientsPage extends StatefulWidget {
 }
 
 class _PatientsPageState extends State<PatientsPage> {
-  final PatientsBloc _patientsBloc = PatientsBloc();
+  final PatientsBloc _bloc = PatientsBloc();
   @override
   Widget build(BuildContext context) {
-    _patientsBloc.fetchAllPatients();
+    _bloc.fetchAllPatients();
     return StreamBuilder<List<Patient>>(
-        stream: _patientsBloc.getPatientsStream(),
+        stream: _bloc.getPatientsStream(),
         initialData: [Patient("Teste")],
         builder: (context, snapshot) {
           if (snapshot.hasData) {
@@ -40,7 +40,7 @@ class _PatientsPageState extends State<PatientsPage> {
 
   @override
   void dispose() {
-    _patientsBloc.closeStream();
+    _bloc.closeStream();
     super.dispose();
   }
 }
