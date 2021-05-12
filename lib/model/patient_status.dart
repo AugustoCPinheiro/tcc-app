@@ -1,0 +1,4 @@
+enum PatientStatus {
+  Normal,
+  Alert,
+}
