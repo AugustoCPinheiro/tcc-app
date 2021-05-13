@@ -13,7 +13,10 @@ class PatientListItem extends StatelessWidget {
     return ListTile(
       leading: patientStatus == PatientStatus.Normal
           ? Icon(Icons.close)
-          : Icon(Icons.announcement_sharp),
+          : Icon(
+              Icons.announcement_sharp,
+              color: Colors.red,
+            ),
       title: Text(title),
     );
   }
