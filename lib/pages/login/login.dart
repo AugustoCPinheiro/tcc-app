@@ -56,11 +56,14 @@ class _LoginState extends State<Login> {
                             _passwordFilled = value.isNotEmpty;
                           });
                         }),
-                    ElevatedButton(
-                        onPressed: _idFilled && _passwordFilled
-                            ? onElevatedButtonPressed
-                            : null,
-                        child: Text(Strings.LOGIN_BUTTON))
+                    Padding(
+                      padding: EdgeInsets.only(top: CustomTheme.getSpacing(2)),
+                      child: ElevatedButton(
+                          onPressed: _idFilled && _passwordFilled
+                              ? onElevatedButtonPressed
+                              : null,
+                          child: Text(Strings.LOGIN_BUTTON)),
+                    )
                   ],
                 ),
               ),

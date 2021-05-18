@@ -3,9 +3,11 @@ class BedOccupation {
   DateTime _endDate;
   String _patientCode;
 
+  BedOccupation(this._startDate, this._endDate, this._patientCode);
+
   BedOccupation.fromJson(Map<String, dynamic> json)
-      : _startDate = json["startDate"],
-        _endDate = json["endDate"],
+      : _startDate = DateTime.parse(json["startDate"]),
+        _endDate = DateTime.parse(json["endDate"]),
         _patientCode = json["patientCode"];
 
   DateTime get startDate => _startDate;
@@ -13,4 +15,10 @@ class BedOccupation {
   DateTime get endDate => _endDate;
 
   String get patientCode => _patientCode;
+
+  Map<String, dynamic> toJson() => {
+        "startDate": _startDate.toString(),
+        "endDate": _endDate.toString(),
+        "patientCode": _patientCode
+      };
 }
