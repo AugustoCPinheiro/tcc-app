@@ -1,7 +1,10 @@
+import 'package:tcc/model/bed.dart';
+
 class BedOccupation {
   DateTime _startDate;
   DateTime _endDate;
   String _patientCode;
+  Bed _bed;
 
   BedOccupation(this._startDate, this._endDate, this._patientCode);
 
