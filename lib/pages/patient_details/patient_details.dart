@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:tcc/components/patient_profile.dart';
+import 'package:tcc/components/story_list.dart';
 import 'package:tcc/model/patient.dart';
 import 'package:tcc/util/theme/custom_theme.dart';
 
@@ -27,6 +28,7 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
             PatientProfile(
               name: widget.patient.name,
             ),
+            StoryList(),
             Flex(
               direction: Axis.vertical,
               children: [
