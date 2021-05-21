@@ -6,16 +6,16 @@ import 'package:tcc/util/theme/custom_theme.dart';
 class ConfigurationsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(bottom: CustomTheme.getSpacing(2)),
-      child: Flex(
-        direction: Axis.vertical,
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          ElevatedButton(
-              onPressed: () {},
-              child: Text(Strings.CONFIGURATIONS_LOGOUT_BUTTON_TEXT)),
-        ],
+    return Container(
+      alignment: Alignment.center,
+      child: Padding(
+        padding: EdgeInsets.only(bottom: CustomTheme.getSpacing(2)),
+        child: ElevatedButton(
+            onPressed: () {},
+            style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(
+                    CustomTheme.getColor(CustomTheme.COLOR_RED))),
+            child: Text(Strings.CONFIGURATIONS_LOGOUT_BUTTON_TEXT)),
       ),
     );
   }

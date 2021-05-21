@@ -10,14 +10,17 @@ class PatientListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      leading: patientStatus == PatientStatus.Normal
-          ? Icon(Icons.close)
-          : Icon(
-              Icons.announcement_sharp,
-              color: Colors.red,
-            ),
-      title: Text(title),
+    return Container(
+      decoration: BoxDecoration(color: Colors.white),
+      child: ListTile(
+        leading: patientStatus == PatientStatus.Normal
+            ? Icon(Icons.close)
+            : Icon(
+                Icons.announcement_sharp,
+                color: Colors.red,
+              ),
+        title: Text(title),
+      ),
     );
   }
 }
