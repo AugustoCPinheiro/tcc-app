@@ -17,6 +17,11 @@ class CustomTheme {
         primaryColor: CustomTheme.getColor(CustomTheme.COLOR_PRIMARY),
         appBarTheme: AppBarTheme(
           color: Colors.white,
+          centerTitle: true,
+          textTheme: TextTheme(
+              headline6: TextStyle(
+            color: Colors.black,
+          )),
         ));
   }
 

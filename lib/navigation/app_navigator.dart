@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:tcc/model/patient.dart';
+import 'package:tcc/pages/charts/chart_page.dart';
 import 'package:tcc/pages/home/home.dart';
 import 'package:tcc/pages/patient_details/patient_details.dart';
 
@@ -10,7 +11,7 @@ class AppNavigator extends StatelessWidget {
     return Navigator(
       pages: [
         true
-            ? MaterialPage(key: ValueKey("home"), child: Home())
+            ? MaterialPage(key: ValueKey("home"), child: ChartPage())
             : MaterialPage(
                 key: ValueKey("login"),
                 child: PatientDetailsPage(

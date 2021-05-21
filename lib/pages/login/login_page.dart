@@ -2,21 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:tcc/components/custom_card.dart';
 import 'package:tcc/components/page_body_container.dart';
-import 'package:tcc/pages/login/loginBloc.dart';
+import 'package:tcc/pages/login/login_page_bloc.dart';
 import 'package:tcc/util/strings/strings.dart';
 import 'package:tcc/util/theme/custom_theme.dart';
 import 'package:tcc/util/validation/email_validator.dart';
 import 'package:tcc/util/validation/password_validator.dart';
 
-class Login extends StatefulWidget {
+class LoginPage extends StatefulWidget {
   @override
-  _LoginState createState() {
-    return _LoginState();
+  _LoginPageState createState() {
+    return _LoginPageState();
   }
 }
 
-class _LoginState extends State<Login> {
-  final LoginBloc _bloc = LoginBloc();
+class _LoginPageState extends State<LoginPage> {
+  final LoginPageBloc _bloc = LoginPageBloc();
   final _formKey = GlobalKey<FormState>();
   bool _idFilled = false;
   bool _passwordFilled = false;

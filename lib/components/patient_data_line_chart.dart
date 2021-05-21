@@ -1,6 +1,7 @@
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:tcc/components/chart_filter.dart';
 import 'package:tcc/model/linear_chart_data.dart';
 import 'package:tcc/model/linear_chart_data_wrapper.dart';
 import 'package:tcc/model/linear_chart_series.dart';
@@ -22,21 +23,16 @@ class PatientDataLineChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Flex(
-      direction: Axis.vertical,
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Column(
       children: [
-        Text("Teste"),
-        Container(
-          height: 10,
-          width: 10,
-          decoration: BoxDecoration(
-            color: Colors.red,
-          ),
+        ChartFilter(
+          chartDataIds: [
+            "Ala",
+            "Ola",
+          ],
         ),
         SizedBox(
-          height: MediaQuery.of(context).size.height / 1.5,
+          height: MediaQuery.of(context).size.height / 2.5,
           child: charts.LineChart(
             dataWrapper.dataSeries
                 .map<charts.Series<LinearChartData, double>>(

@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:tcc/components/app_bottom_navigation_bar.dart';
 import 'package:tcc/components/page_body_container.dart';
 import 'package:tcc/pages/configurations/configurations.dart';
-import 'package:tcc/pages/patients/patients.dart';
+import 'package:tcc/pages/patients/patients_page.dart';
 
 class Home extends StatefulWidget {
   @override

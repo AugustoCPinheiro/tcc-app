@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:tcc/model/patient.dart';
 import 'package:tcc/resources/repository.dart';
 
-class PatientsBloc {
+class PatientsPageBloc {
   final _repository = Repository();
   final _patientsController = StreamController<List<Patient>>();
 
