@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:tcc/components/custom_card.dart';
+import 'package:tcc/components/page_body_container.dart';
 import 'package:tcc/pages/login/loginBloc.dart';
 import 'package:tcc/util/strings/strings.dart';
 import 'package:tcc/util/theme/custom_theme.dart';
@@ -21,15 +23,13 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return PageBodyContainer(
       padding: EdgeInsets.symmetric(
           vertical: 0.0, horizontal: CustomTheme.getSpacing(2)),
-      color: Colors.white70,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Card(
-            elevation: CustomTheme.DEFAULT_ELEVATION,
+          CustomCard(
             child: Padding(
               padding: EdgeInsets.all(CustomTheme.getSpacing(4)),
               child: Form(

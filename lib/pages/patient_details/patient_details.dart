@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:tcc/components/custom_card.dart';
+import 'package:tcc/components/page_body_container.dart';
 import 'package:tcc/components/patient_profile.dart';
 import 'package:tcc/model/patient.dart';
 import 'package:tcc/util/theme/custom_theme.dart';
@@ -20,22 +22,27 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: Padding(
-        padding: EdgeInsets.all(CustomTheme.getSpacing(1)),
-        child: Column(
-          children: [
-            PatientProfile(
-              name: widget.patient.name,
-            ),
-            Flex(
-              direction: Axis.vertical,
+      body: PageBodyContainer(
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(
+              CustomTheme.getSpacing(1),
+              CustomTheme.getSpacing(5),
+              CustomTheme.getSpacing(1),
+              CustomTheme.getSpacing(1)),
+          child: CustomCard(
+            child: Column(
               children: [
-                Card(
+                PatientProfile(
+                  name: widget.patient.name,
+                ),
+                Container(
+                  decoration:
+                      BoxDecoration(border: Border.all(color: Colors.black)),
                   child: Column(children: [Text("Teste")]),
                 )
               ],
-            )
-          ],
+            ),
+          ),
         ),
       ),
     );
