@@ -16,8 +16,7 @@ class CustomTheme {
     return ThemeData(
         primaryColor: CustomTheme.getColor(CustomTheme.COLOR_PRIMARY),
         appBarTheme: AppBarTheme(
-          color: Colors.white,
-        ));
+            color: Colors.white, iconTheme: IconThemeData.fallback()));
   }
 
   static double getSpacing(int amount) {
