@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:tcc/components/app_bottom_navigation_bar.dart';
+import 'package:tcc/components/page_body_container.dart';
 import 'package:tcc/pages/configurations/configurations.dart';
 import 'package:tcc/pages/patients/patients.dart';
 
@@ -23,7 +24,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _homePages.elementAt(_selectedIndex),
+      body: PageBodyContainer(child: _homePages.elementAt(_selectedIndex)),
       bottomNavigationBar: AppBottomNavigationBar(
         selectedIndex: _selectedIndex,
         onItemTapped: _onItemTapped,

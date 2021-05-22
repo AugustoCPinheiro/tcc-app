@@ -9,7 +9,7 @@ class AppNavigator extends StatelessWidget {
   Widget build(BuildContext context) {
     return Navigator(
       pages: [
-        false
+        true
             ? MaterialPage(key: ValueKey("home"), child: Home())
             : MaterialPage(
                 key: ValueKey("login"),

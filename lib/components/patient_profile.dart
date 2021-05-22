@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:tcc/components/labeled_data.dart';
 import 'package:tcc/util/theme/custom_theme.dart';
 
 class PatientProfile extends StatelessWidget {
@@ -22,13 +23,13 @@ class PatientProfile extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: CustomTheme.getSpacing(2)),
           child: Column(
             children: [
-              Text(
-                "Nome: ${this.name}",
-                textAlign: TextAlign.left,
+              LabeledData(
+                label: "Nome",
+                text: this.name,
               ),
-              Text(
-                "Data de nascimento: ${this.birthdate}",
-                textAlign: TextAlign.left,
+              LabeledData(
+                label: "Data de nascimento",
+                text: this.birthdate,
               ),
             ],
           ),
