@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:tcc/components/custom_card.dart';
 import 'package:tcc/components/page_body_container.dart';
 import 'package:tcc/components/patient_profile.dart';
+import 'package:tcc/components/story_list.dart';
 import 'package:tcc/model/patient.dart';
 import 'package:tcc/util/theme/custom_theme.dart';
 
