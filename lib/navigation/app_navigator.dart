@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:tcc/model/patient.dart';
 import 'package:tcc/pages/home/home.dart';
+import 'package:tcc/pages/login/login.dart';
 import 'package:tcc/pages/patient_details/patient_details.dart';
 
 class AppNavigator extends StatelessWidget {
@@ -9,13 +10,9 @@ class AppNavigator extends StatelessWidget {
   Widget build(BuildContext context) {
     return Navigator(
       pages: [
-        true
+        false
             ? MaterialPage(key: ValueKey("home"), child: Home())
-            : MaterialPage(
-                key: ValueKey("login"),
-                child: PatientDetailsPage(
-                  patient: Patient.asTest(),
-                ))
+            : MaterialPage(key: ValueKey("login"), child: Login())
       ],
       onGenerateRoute: (settings) {
         switch (settings.name) {
