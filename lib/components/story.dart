@@ -12,12 +12,26 @@ class Story extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RawMaterialButton(
-      onPressed: onTap,
+      onPressed: () {
+        switch (type) {
+          case StoryType.CHART:
+            print("add chart page");
+            break;
+          default:
+            throw Exception("Untreated case");
+        }
+        if (onTap != null) {
+          onTap();
+        }
+      },
       fillColor: CustomTheme.getColor(ThemeColors.BLUE_DARKER),
       elevation: CustomTheme.DEFAULT_ELEVATION,
+      constraints: BoxConstraints(minHeight: 40.0, minWidth: 40.0),
       shape: CircleBorder(),
-      child: Icon(Icons.account_tree_rounded),
-      padding: EdgeInsets.all(CustomTheme.getSpacing(3)),
+      child: Icon(
+        Icons.account_tree_rounded,
+        color: Colors.white,
+      ),
     );
   }
 }

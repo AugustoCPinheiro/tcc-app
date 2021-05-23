@@ -37,6 +37,7 @@ class _LoginState extends State<Login> {
                 child: Column(
                   children: [
                     TextFormField(
+                      textInputAction: TextInputAction.next,
                       validator: EmailValidator().validate,
                       decoration:
                           InputDecoration(labelText: Strings.LOGIN_ID_HINT),
@@ -47,6 +48,7 @@ class _LoginState extends State<Login> {
                       },
                     ),
                     TextFormField(
+                        textInputAction: TextInputAction.done,
                         validator: PasswordValidator().validate,
                         decoration: InputDecoration(
                             labelText: Strings.LOGIN_PASSWORD_HINT),

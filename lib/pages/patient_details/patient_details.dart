@@ -31,17 +31,19 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
               CustomTheme.getSpacing(1),
               CustomTheme.getSpacing(1)),
           child: CustomCard(
-            child: Column(
-              children: [
-                PatientProfile(
-                  name: widget.patient.name,
-                ),
-                StoryList(),
-                Container(
-                  decoration:
-                      BoxDecoration(border: Border.all(color: Colors.black)),
-                )
-              ],
+            child: Padding(
+              padding:
+                  EdgeInsets.symmetric(horizontal: CustomTheme.getSpacing(2)),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  PatientProfile(
+                    name: widget.patient.name,
+                  ),
+                  Text("Monitoramento: "),
+                  StoryList(),
+                ],
+              ),
             ),
           ),
         ),

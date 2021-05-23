@@ -8,12 +8,15 @@ class StoryList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemBuilder: (context, index) {
-        return Story();
-      },
-      scrollDirection: Axis.horizontal,
-      itemCount: stories.length,
+    return SizedBox(
+      child: ListView.builder(
+        itemBuilder: (context, index) {
+          return Story();
+        },
+        scrollDirection: Axis.horizontal,
+        itemCount: 1,
+      ),
+      height: 40.0,
     );
   }
 }
