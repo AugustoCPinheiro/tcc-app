@@ -8,7 +8,8 @@ class PatientsBloc {
   final _patientsController = StreamController<List<Patient>>();
 
   fetchAllPatients() async {
-    var patients = await _repository.fetchAllPatients();
+    List<Patient> patients = await _repository.fetchAllPatients();
+    print(patients);
     _patientsController.sink.add(patients);
   }
 

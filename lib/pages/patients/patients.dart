@@ -42,6 +42,8 @@ class _PatientsPageState extends State<PatientsPage> {
                                   )));
                     },
                     title: snapshot.data.elementAt(index).name,
+                    subtitle:
+                        snapshot.data.elementAt(index).bedOccupation.bed.code,
                     patientStatus: PatientStatus.Alert,
                   );
                 },
