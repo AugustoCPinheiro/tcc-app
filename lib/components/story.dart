@@ -28,9 +28,11 @@ class Story extends StatelessWidget {
       elevation: CustomTheme.DEFAULT_ELEVATION,
       constraints: BoxConstraints(minHeight: 40.0, minWidth: 40.0),
       shape: CircleBorder(),
-      child: Icon(
-        Icons.account_tree_rounded,
-        color: Colors.white,
+      child: Center(
+        child: Icon(
+          Icons.account_tree_rounded,
+          color: Colors.white,
+        ),
       ),
     );
   }

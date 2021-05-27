@@ -9,7 +9,6 @@ class PatientsBloc {
 
   fetchAllPatients() async {
     List<Patient> patients = await _repository.fetchAllPatients();
-    print(patients);
     _patientsController.sink.add(patients);
   }
 

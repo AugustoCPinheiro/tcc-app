@@ -14,7 +14,7 @@ class StoryList extends StatelessWidget {
           return Story();
         },
         scrollDirection: Axis.horizontal,
-        itemCount: 1,
+        itemCount: stories.length,
       ),
       height: 40.0,
     );

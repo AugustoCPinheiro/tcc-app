@@ -20,7 +20,8 @@ class _LoginState extends State<Login> {
   final _formKey = GlobalKey<FormState>();
   bool _idFilled = false;
   bool _passwordFilled = false;
-
+  String _id = "";
+  String _password = "";
   @override
   Widget build(BuildContext context) {
     return PageBodyContainer(
@@ -44,6 +45,7 @@ class _LoginState extends State<Login> {
                       onChanged: (value) {
                         setState(() {
                           _idFilled = value.isNotEmpty;
+                          _id = value;
                         });
                       },
                     ),
@@ -56,15 +58,25 @@ class _LoginState extends State<Login> {
                         onChanged: (value) {
                           setState(() {
                             _passwordFilled = value.isNotEmpty;
+                            _password = value;
                           });
                         }),
                     Padding(
                       padding: EdgeInsets.only(top: CustomTheme.getSpacing(2)),
-                      child: ElevatedButton(
-                          onPressed: _idFilled && _passwordFilled
-                              ? onElevatedButtonPressed
-                              : null,
-                          child: Text(Strings.LOGIN_BUTTON)),
+                      child: StreamBuilder(
+                        stream: _bloc.getAuthStream(),
+                        initialData: 0,
+                        builder: (context, snapshot) {
+                          if (!snapshot.hasData) {
+                            return CircularProgressIndicator();
+                          }
+                          return ElevatedButton(
+                              onPressed: _idFilled && _passwordFilled
+                                  ? onElevatedButtonPressed
+                                  : null,
+                              child: Text(Strings.LOGIN_BUTTON));
+                        },
+                      ),
                     )
                   ],
                 ),
@@ -76,10 +88,19 @@ class _LoginState extends State<Login> {
     );
   }
 
-  onElevatedButtonPressed() {
+  onElevatedButtonPressed() async {
     if (_formKey.currentState.validate()) {
-      _bloc.saveUser();
-      Navigator.pushNamed(context, "Home");
+      bool response = await _bloc.authUser(_id, _password);
+      if (response) {
+        _bloc.saveUser();
+        Navigator.pushNamed(context, "Home");
+      }
     }
+  }
+
+  @override
+  void dispose() {
+    _bloc.dispose();
+    super.dispose();
   }
 }

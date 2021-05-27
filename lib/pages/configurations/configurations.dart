@@ -12,7 +12,9 @@ class ConfigurationsPage extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.only(bottom: CustomTheme.getSpacing(2)),
         child: ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, "login");
+            },
             style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(
                     CustomTheme.getColor(ThemeColors.RED))),

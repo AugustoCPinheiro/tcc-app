@@ -8,6 +8,7 @@ import 'package:tcc/pages/patients/patients_bloc.dart';
 import 'package:tcc/persistence/controller/patient_persistence_file_controller.dart';
 import 'package:tcc/persistence/facade/persistence_facade.dart';
 import 'package:tcc/util/theme/custom_theme.dart';
+import 'package:tcc/util/theme/theme_colors.dart';
 
 class PatientsPage extends StatefulWidget {
   @override
@@ -20,16 +21,20 @@ class _PatientsPageState extends State<PatientsPage> {
   final PatientsBloc _bloc = PatientsBloc();
   final PersistenceFacade persistenceFacade =
       PatientPersistenceFileController();
+
   @override
   Widget build(BuildContext context) {
     _bloc.fetchAllPatients();
-    persistenceFacade.findAll().then((value) => print(value[0]));
+
     return Padding(
       padding: EdgeInsets.symmetric(vertical: CustomTheme.getSpacing(3)),
       child: StreamBuilder<List<Patient>>(
           stream: _bloc.getPatientsStream(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
+              if (snapshot.data.isEmpty) {
+                return Expanded(child: Text("Sem registros"));
+              }
               return ListView.builder(
                 itemBuilder: (context, index) {
                   return PatientListItem(
@@ -49,12 +54,17 @@ class _PatientsPageState extends State<PatientsPage> {
                 },
                 itemCount: snapshot.data.length,
               );
-            } else if (snapshot.hasError) {
-              return Text("error");
-            } else {
-              return Text("Sem registros");
             }
-            return Center(child: CircularProgressIndicator());
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(
+                  child: CircularProgressIndicator(
+                backgroundColor: CustomTheme.getColor(ThemeColors.RED),
+              ));
+            }
+            if (snapshot.hasError) {
+              return Text("Erro");
+            }
+            return Container();
           }),
     );
   }
