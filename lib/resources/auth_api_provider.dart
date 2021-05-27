@@ -8,7 +8,6 @@ import 'package:tcc/util/http/http_status.dart';
 
 class AuthApiProvider extends BaseApiProvider {
   Future<User> authorize(UserAuth userAuth) async {
-    print(jsonEncode(userAuth.toJson()));
     final response = await client.post(buildUrl("auth"),
         headers: {"Content-Type": "application/json"},
         body: jsonEncode(userAuth.toJson()));

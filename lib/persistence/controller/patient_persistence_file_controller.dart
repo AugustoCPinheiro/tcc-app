@@ -36,7 +36,8 @@ class PatientPersistenceFileController
   saveAll(List<Patient> patients) async {
     final file = await _localFile;
 
-    file.writeAsString(jsonEncode(patients.map((e) => e.toJson())));
+    file.writeAsString(jsonEncode(
+        patients.map<Map<String, dynamic>>((e) => e.toJson()).toList()));
   }
 
   @override
