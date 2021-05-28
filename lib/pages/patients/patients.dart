@@ -3,7 +3,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tcc/components/patient_list_item.dart';
 import 'package:tcc/model/patient_health_status.dart';
-import 'package:tcc/pages/patient_details/patient_details.dart';
+import 'package:tcc/navigation/app_navigator_bloc.dart';
+import 'package:tcc/navigation/app_navigator_event.dart';
 import 'package:tcc/pages/patients/patients_bloc.dart';
 import 'package:tcc/pages/patients/patients_event.dart';
 import 'package:tcc/pages/patients/patients_state.dart';
@@ -23,7 +24,7 @@ class _PatientsPageState extends State<PatientsPage> {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: CustomTheme.getSpacing(3)),
       child: BlocProvider(
-        create: (_) => PatientsBloc()..add(PatientsFetched()),
+        create: (context) => PatientsBloc()..add(PatientsFetched()),
         child: BlocListener<PatientsBloc, PatientsState>(
           child: BlocBuilder<PatientsBloc, PatientsState>(
             builder: (context, state) {
@@ -38,13 +39,9 @@ class _PatientsPageState extends State<PatientsPage> {
                     itemBuilder: (context, index) {
                       return PatientListItem(
                         onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => PatientDetailsPage(
-                                        patient:
-                                            state.patients.elementAt(index),
-                                      )));
+                          BlocProvider.of<AppNavigatorBloc>(context).add(
+                              PatientDetailsCalled(
+                                  state.patients.elementAt(index)));
                         },
                         title: state.patients.elementAt(index).name,
                         subtitle: state.patients
