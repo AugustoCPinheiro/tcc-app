@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:tcc/components/custom_card.dart';
+import 'package:tcc/components/health_data_item.dart';
 import 'package:tcc/components/page_body_container.dart';
 import 'package:tcc/components/patient_profile.dart';
 import 'package:tcc/components/story_list.dart';
@@ -42,6 +43,7 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
                   ),
                   Text("Monitoramento: "),
                   StoryList(),
+                  HealthDataItem()
                 ],
               ),
             ),
