@@ -1,8 +1,11 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/widgets.dart';
 import 'package:tcc/navigation/app_navigator_event.dart';
 import 'package:tcc/navigation/app_navigator_state.dart';
 
 class AppNavigatorBloc extends Bloc<AppNavigatorEvent, AppNavigatorState> {
+  List<Page> navigationStack = [];
+
   AppNavigatorBloc(AppNavigatorState initialState) : super(initialState);
 
   @override

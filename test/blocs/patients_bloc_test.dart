@@ -16,6 +16,11 @@ void main() {
       expect(patientsBloc.state.status, PatientsStatus.INITIAL);
     });
 
+    test("Status on fetch", () async {
+      await expectLater(patientsBloc.state.status,
+          emitsInOrder([PatientsStatus.INITIAL, PatientsStatus.SUCCESS]));
+    });
+
     blocTest<PatientsBloc, PatientsState>("Status on fetch",
         build: () => patientsBloc,
         act: (bloc) => bloc.add(PatientsFetched()),
