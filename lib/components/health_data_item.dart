@@ -13,10 +13,7 @@ class HealthDataItem extends StatelessWidget {
             gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                colors: [
-              CustomTheme.getColor(ThemeColors.BLUE_DARKER),
-              CustomTheme.getColor(ThemeColors.BLUE_DARK)
-            ])),
+                colors: [ThemeColors.BLUE_DARKER, ThemeColors.BLUE_DARK])),
         padding: EdgeInsets.symmetric(
             horizontal: CustomTheme.getSpacing(3),
             vertical: CustomTheme.getSpacing(2)),

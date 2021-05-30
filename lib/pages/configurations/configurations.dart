@@ -16,8 +16,7 @@ class ConfigurationsPage extends StatelessWidget {
               Navigator.pushNamed(context, "login");
             },
             style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(
-                    CustomTheme.getColor(ThemeColors.RED))),
+                backgroundColor: MaterialStateProperty.all(ThemeColors.RED)),
             child: Text(Strings.CONFIGURATIONS_LOGOUT_BUTTON_TEXT)),
       ),
     );

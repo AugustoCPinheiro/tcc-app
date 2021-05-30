@@ -58,7 +58,7 @@ class _PatientsPageState extends State<PatientsPage> {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(
                   child: CircularProgressIndicator(
-                backgroundColor: CustomTheme.getColor(ThemeColors.RED),
+                backgroundColor: ThemeColors.RED,
               ));
             }
             if (snapshot.hasError) {
