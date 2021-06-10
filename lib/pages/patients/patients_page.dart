@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tcc/components/patient_list_item.dart';
-import 'package:tcc/model/patient.dart';
-import 'package:tcc/model/patient_status.dart';
+import 'package:tcc/model/patient_health_status.dart';
+import 'package:tcc/navigation/app_navigator_bloc.dart';
+import 'package:tcc/navigation/app_navigator_event.dart';
+import 'package:tcc/pages/patients/patients_event.dart';
 import 'package:tcc/pages/patients/patients_page_bloc.dart';
+import 'package:tcc/pages/patients/patients_state.dart';
 import 'package:tcc/persistence/controller/patient_persistence_file_controller.dart';
 import 'package:tcc/persistence/facade/persistence_facade.dart';
 import 'package:tcc/util/theme/custom_theme.dart';
+import 'package:tcc/util/theme/theme_colors.dart';
 
 class PatientsPage extends StatefulWidget {
   @override
@@ -21,35 +26,65 @@ class _PatientsPageState extends State<PatientsPage> {
       PatientPersistenceFileController();
   @override
   Widget build(BuildContext context) {
-    _bloc.fetchAllPatients();
-    persistenceFacade.findAll().then((value) => print(value[0]));
     return Padding(
       padding: EdgeInsets.symmetric(vertical: CustomTheme.getSpacing(3)),
-      child: StreamBuilder<List<Patient>>(
-          stream: _bloc.getPatientsStream(),
-          initialData: [Patient.asTest()],
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return ListView.builder(
-                itemBuilder: (context, index) {
-                  return PatientListItem(
-                    title: snapshot.data.elementAt(index).name,
-                    patientStatus: PatientStatus.Alert,
+      child: BlocProvider(
+        create: (context) => PatientsPageBloc()..add(PatientsFetched()),
+        child: BlocListener<PatientsPageBloc, PatientsState>(
+          child: BlocBuilder<PatientsPageBloc, PatientsState>(
+            builder: (context, state) {
+              switch (state.status) {
+                case PatientsStatus.INITIAL:
+                  return Center(
+                      child: CircularProgressIndicator(
+                    backgroundColor: CustomTheme.getColor(ThemeColors.RED),
+                  ));
+                case PatientsStatus.SUCCESS:
+                  return ListView.builder(
+                    itemBuilder: (context, index) {
+                      return PatientListItem(
+                        onTap: () {
+                          BlocProvider.of<AppNavigatorBloc>(context).add(
+                              PatientDetailsCalled(
+                                  state.patients.elementAt(index)));
+                        },
+                        title: state.patients.elementAt(index).name,
+                        subtitle: state.patients
+                            .elementAt(index)
+                            .bedOccupation
+                            .bed
+                            .code,
+                        patientStatus: PatientHealthStatus.Alert,
+                      );
+                    },
+                    itemCount: state.patients.length,
                   );
-                },
-                itemCount: snapshot.data.length,
-              );
-            } else if (snapshot.hasError) {
-              return Text("error");
-            }
-            return Center(child: CircularProgressIndicator());
-          }),
-    );
-  }
 
-  @override
-  void dispose() {
-    _bloc.closeStream();
-    super.dispose();
+                case PatientsStatus.EMPTY:
+                  return Center(
+                      child: Text(
+                    "Sem registros",
+                    style: TextStyle(color: Colors.white),
+                  ));
+
+                case PatientsStatus.FAILURE:
+                  return Text("Erro");
+
+                default:
+                  return Text("Erro");
+              }
+            },
+          ),
+          listener: (context, state) {
+            if (state.status == PatientsStatus.FAILURE) {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                backgroundColor: CustomTheme.getColor(ThemeColors.RED),
+                content: Text('Ocorreu um erro'),
+              ));
+            }
+          },
+        ),
+      ),
+    );
   }
 }

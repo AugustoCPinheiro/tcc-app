@@ -1,5 +1,17 @@
-abstract class HttpError {}
+import 'dart:io';
 
-class BadRequestError extends HttpError {}
+import 'package:tcc/util/http/http_status.dart';
 
-class InternalServerError extends HttpError {}
+abstract class HttpError {
+  int statusCode;
+
+  HttpError(this.statusCode);
+}
+
+class BadRequestError extends HttpError {
+  BadRequestError() : super(HttpStatus.BAD_REQUEST);
+}
+
+class InternalServerError extends HttpError {
+  InternalServerError() : super(HttpStatus.INTERNAL_SERVER_ERROR);
+}

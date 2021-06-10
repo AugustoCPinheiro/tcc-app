@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:tcc/components/custom_card.dart';
+import 'package:tcc/components/health_data_item.dart';
 import 'package:tcc/components/page_body_container.dart';
 import 'package:tcc/components/patient_profile.dart';
+import 'package:tcc/components/story_list.dart';
 import 'package:tcc/model/patient.dart';
 import 'package:tcc/util/theme/custom_theme.dart';
 
@@ -30,17 +32,20 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
               CustomTheme.getSpacing(1),
               CustomTheme.getSpacing(1)),
           child: CustomCard(
-            child: Column(
-              children: [
-                PatientProfile(
-                  name: widget.patient.name,
-                ),
-                Container(
-                  decoration:
-                      BoxDecoration(border: Border.all(color: Colors.black)),
-                  child: Column(children: [Text("Teste")]),
-                )
-              ],
+            child: Padding(
+              padding:
+                  EdgeInsets.symmetric(horizontal: CustomTheme.getSpacing(2)),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  PatientProfile(
+                    name: widget.patient.name,
+                  ),
+                  Text("Monitoramento: "),
+                  StoryList(),
+                  HealthDataItem()
+                ],
+              ),
             ),
           ),
         ),
