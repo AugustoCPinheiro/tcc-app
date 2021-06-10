@@ -16,7 +16,7 @@ class CustomTheme {
 
   static ThemeData getTheme() {
     return ThemeData(
-        primaryColor: CustomTheme.getColor(CustomTheme.COLOR_PRIMARY),
+        primaryColor: CustomTheme.COLOR_PRIMARY,
         appBarTheme: AppBarTheme(
             color: Colors.white, iconTheme: IconThemeData.fallback()));
   }

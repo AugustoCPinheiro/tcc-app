@@ -8,7 +8,6 @@ import 'package:tcc/resources/repository.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final Repository _repository = Repository();
-  final _authController = StreamController();
 
   LoginBloc() : super(LoginState());
 
@@ -21,20 +20,18 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       yield state.copyWith(status: LoginStatus.DENIED);
     }
     if (event is LoginSubmit) {
-      _repository.authUser(UserAuth(event.id, event.password));
+      authUser(event.id, event.password);
+      yield state.copyWith(status: LoginStatus.LOADING);
     }
   }
 
   authUser(String id, String password) async {
-    _authController.sink.add(null);
     dynamic response = await _repository.authUser(UserAuth(id, password));
-    _authController.sink.add(response);
+    if (response) {
+      add(LoginAccepted());
+    } else {
+      add(LoginDenied());
+    }
     return response;
-  }
-
-  Stream getAuthStream() => _authController.stream;
-
-  dispose() {
-    _authController.close();
   }
 }

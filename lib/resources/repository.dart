@@ -13,7 +13,7 @@ class Repository {
 
   Future<bool> authUser(UserAuth userAuth) async {
     try {
-      _authApiProvider.authorize(userAuth);
+      await _authApiProvider.authorize(userAuth);
 
       return true;
     } catch (e) {

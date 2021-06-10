@@ -1,4 +1,4 @@
-enum LoginStatus { INITIAL, ACCEPTED, DENIED }
+enum LoginStatus { INITIAL, LOADING, ACCEPTED, DENIED }
 
 class LoginState {
   final LoginStatus status;
