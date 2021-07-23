@@ -22,7 +22,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final LoginPageBloc _bloc = LoginPageBloc();
   final _formKey = GlobalKey<FormState>();
   String _id = "";
   String _password = "";
@@ -32,13 +31,13 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => LoginBloc(),
+      create: (_) => LoginPageBloc(),
       child: BlocBuilder<LoginBloc, LoginState>(
         builder: (context, state) {
           return PageBodyContainer(
             padding: EdgeInsets.symmetric(
                 vertical: 0.0, horizontal: CustomTheme.getSpacing(2)),
-            child: BlocListener<LoginBloc, LoginState>(
+            child: BlocListener<LoginPageBloc, LoginState>(
               listener: (context, state) {
                 if (state.status == LoginStatus.ACCEPTED) {
                   BlocProvider.of<AppNavigatorBloc>(context).add(HomeCalled());
@@ -103,7 +102,7 @@ class _LoginPageState extends State<LoginPage> {
 
   _onElevatedButtonPressed(context) {
     if (_formKey.currentState.validate()) {
-      BlocProvider.of<LoginBloc>(context).add(LoginSubmit(_id, _password));
+      BlocProvider.of<LoginPageBloc>(context).add(LoginSubmit(_id, _password));
     }
   }
 }
