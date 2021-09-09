@@ -41,9 +41,24 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
                   PatientProfile(
                     name: widget.patient.name,
                   ),
-                  Text("Monitoramento: "),
-                  StoryList(),
-                  HealthDataItem()
+                  Padding(
+                      padding:
+                          EdgeInsets.only(bottom: CustomTheme.getSpacing(2)),
+                      child: Text(
+                        "Monitoramento: ",
+                      )),
+                  Padding(
+                    padding: EdgeInsets.only(bottom: CustomTheme.getSpacing(2)),
+                    child: StoryList(),
+                  ),
+                  GridView.builder(
+                      physics: ScrollPhysics(),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
+                          crossAxisSpacing: CustomTheme.getSpacing(2)),
+                      shrinkWrap: true,
+                      itemCount: 4,
+                      itemBuilder: (context, index) => HealthDataItem()),
                 ],
               ),
             ),
