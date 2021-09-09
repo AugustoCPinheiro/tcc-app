@@ -1,14 +1,19 @@
 class PatientHealth {
+  String _dataType;
   String _patientCode;
-  HealthData _healthData;
+  List<HealthData> _healthData;
 
   PatientHealth.fromJson(Map<String, dynamic> json)
-      : _patientCode = json["patientCode"],
-        _healthData = HealthData.fromJson(json["healthData"]);
+      : _dataType = json["dataType"],
+        _patientCode = json["patientCode"],
+        _healthData = (json["healthData"] as List)
+            .map<HealthData>((e) => HealthData.fromJson(e));
 
   String get patientCode => _patientCode;
 
-  HealthData get healthData => _healthData;
+  List<HealthData> get healthData => _healthData;
+
+  String get dataType => _dataType;
 }
 
 class HealthData {
