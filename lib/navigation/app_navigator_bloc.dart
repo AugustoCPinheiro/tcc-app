@@ -21,5 +21,12 @@ class AppNavigatorBloc extends Bloc<AppNavigatorEvent, AppNavigatorState> {
       yield AppNavigatorState.withPayload(
           NavigatorStatus.PATIENT_DETAILS, event.selectedPatient);
     }
+
+    if (event is ChartsPageCalled) {
+      yield AppNavigatorState.withPayload(NavigatorStatus.CHARTS, {
+        "currentPatient": event.currentPatient,
+        "currentPatientHealth": event.currentPatientHealth
+      });
+    }
   }
 }

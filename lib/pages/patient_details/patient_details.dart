@@ -5,8 +5,11 @@ import 'package:tcc/components/custom_card.dart';
 import 'package:tcc/components/health_data_item.dart';
 import 'package:tcc/components/page_body_container.dart';
 import 'package:tcc/components/patient_profile.dart';
+import 'package:tcc/components/story.dart';
 import 'package:tcc/components/story_list.dart';
 import 'package:tcc/model/patient.dart';
+import 'package:tcc/navigation/app_navigator_bloc.dart';
+import 'package:tcc/navigation/app_navigator_event.dart';
 import 'package:tcc/pages/patient_details/patient_details_bloc.dart';
 import 'package:tcc/pages/patient_details/patient_details_event.dart';
 import 'package:tcc/pages/patient_details/patient_details_state.dart';
@@ -72,7 +75,16 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
                             Padding(
                               padding: EdgeInsets.only(
                                   bottom: CustomTheme.getSpacing(2)),
-                              child: StoryList(),
+                              child: StoryList(stories: [
+                                Story(
+                                  type: StoryType.CHART,
+                                  onTap: () {
+                                    BlocProvider.of<AppNavigatorBloc>(context)
+                                        .add(ChartsPageCalled(widget.patient,
+                                            state.patientHealth));
+                                  },
+                                )
+                              ]),
                             ),
                             GridView.builder(
                                 physics: ScrollPhysics(),
@@ -83,12 +95,12 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
                                             CustomTheme.getSpacing(2)),
                                 shrinkWrap: true,
                                 itemCount: state.patientHealth.healthData.last
-                                    .toJson()
+                                    .toIterable()
                                     .length,
                                 itemBuilder: (context, index) {
                                   MapEntry entry = state
                                       .patientHealth.healthData.last
-                                      .toJson()
+                                      .toIterable()
                                       .entries
                                       .elementAt(index);
                                   return HealthDataItem(

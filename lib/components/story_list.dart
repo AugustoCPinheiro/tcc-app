@@ -1,5 +1,4 @@
 import 'package:flutter/widgets.dart';
-import 'package:tcc/components/story.dart';
 
 class StoryList extends StatelessWidget {
   final List<dynamic> stories;
@@ -11,12 +10,10 @@ class StoryList extends StatelessWidget {
     return SizedBox(
       child: ListView.builder(
         itemBuilder: (context, index) {
-          return Story(
-            type: StoryType.CHART,
-          );
+          return stories[index];
         },
         scrollDirection: Axis.horizontal,
-        itemCount: 1,
+        itemCount: stories.length,
       ),
       height: 40.0,
     );

@@ -1,12 +1,12 @@
 import 'package:tcc/model/linear_chart_data.dart';
 
-class LinearChartSeries {
-  List<LinearChartData> _data;
+class TimeChartSeries {
+  List<TimeChartData> _data;
   String _id;
 
-  LinearChartSeries(this._id, this._data);
+  TimeChartSeries(this._id, this._data);
 
-  List<LinearChartData> get data => _data;
+  List<TimeChartData> get data => _data;
 
   String get id => _id;
 }

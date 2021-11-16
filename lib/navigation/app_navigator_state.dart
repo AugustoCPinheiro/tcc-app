@@ -1,4 +1,4 @@
-enum NavigatorStatus { HOME, LOGIN, PATIENT_DETAILS }
+enum NavigatorStatus { HOME, LOGIN, PATIENT_DETAILS, CHARTS }
 
 class AppNavigatorState {
   final NavigatorStatus status;

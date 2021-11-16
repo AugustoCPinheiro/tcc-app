@@ -17,6 +17,7 @@ class PatientHealth {
 }
 
 class HealthData {
+  DateTime _date;
   String _bpm;
   String _sat;
   String _sysPressure;
@@ -26,10 +27,12 @@ class HealthData {
       : _bpm = json["heart_rate"],
         _sat = json["saturation"],
         _sysPressure = json["systolic_pressure"],
-        _diasPressure = json["diastolic_pressure"];
+        _diasPressure = json["diastolic_pressure"],
+        _date = DateTime.parse(json["date"]);
 
-  Map<String, String> toJson() =>
+  Map<String, String> toIterable() =>
       {"BPM": _bpm, "SAT": _sat, "SP": _sysPressure, "DP": _diasPressure};
+
   String get sat => _sat;
 
   String get bpm => _bpm;
@@ -37,4 +40,6 @@ class HealthData {
   String get diasPressure => _diasPressure;
 
   String get sysPressure => _sysPressure;
+
+  DateTime get date => _date;
 }

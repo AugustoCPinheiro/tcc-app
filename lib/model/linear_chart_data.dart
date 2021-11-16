@@ -1,10 +1,10 @@
-class LinearChartData {
-  double _xAxis;
+class TimeChartData {
+  DateTime _xAxis;
   double _yAxis;
 
-  LinearChartData(this._xAxis, this._yAxis);
+  TimeChartData(this._xAxis, this._yAxis);
 
   double get yAxis => _yAxis;
 
-  double get xAxis => _xAxis;
+  DateTime get xAxis => _xAxis;
 }
