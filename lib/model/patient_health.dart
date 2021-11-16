@@ -6,8 +6,8 @@ class PatientHealth {
   PatientHealth.fromJson(Map<String, dynamic> json)
       : _dataType = json["dataType"],
         _patientCode = json["patientCode"],
-        _healthData = (json["healthData"] as List)
-            .map<HealthData>((e) => HealthData.fromJson(e));
+        _healthData = List.from((json["healthData"] as List)
+            .map<HealthData>((e) => HealthData.fromJson(e)));
 
   String get patientCode => _patientCode;
 
@@ -17,14 +17,24 @@ class PatientHealth {
 }
 
 class HealthData {
-  int _bpm;
-  int _sat;
+  String _bpm;
+  String _sat;
+  String _sysPressure;
+  String _diasPressure;
 
   HealthData.fromJson(Map<String, dynamic> json)
-      : _bpm = json["bpm"],
-        _sat = json["sat"];
+      : _bpm = json["heart_rate"],
+        _sat = json["saturation"],
+        _sysPressure = json["systolic_pressure"],
+        _diasPressure = json["diastolic_pressure"];
 
-  int get sat => _sat;
+  Map<String, String> toJson() =>
+      {"BPM": _bpm, "SAT": _sat, "SP": _sysPressure, "DP": _diasPressure};
+  String get sat => _sat;
 
-  int get bpm => _bpm;
+  String get bpm => _bpm;
+
+  String get diasPressure => _diasPressure;
+
+  String get sysPressure => _sysPressure;
 }

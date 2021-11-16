@@ -1,4 +1,5 @@
 import 'package:tcc/model/patient.dart';
+import 'package:tcc/model/patient_health.dart';
 import 'package:tcc/model/user_auth.dart';
 import 'package:tcc/resources/auth_api_provider.dart';
 import 'package:tcc/resources/patients_api_provider.dart';
@@ -10,6 +11,9 @@ class Repository {
 
   Future<List<Patient>> fetchAllPatients() =>
       _patientsApiProvider.fetchPatients();
+
+  Future<PatientHealth> fetchPatientHealth(String patientCode) =>
+      _patientsApiProvider.fetchPatientDetails(patientCode);
 
   Future<bool> authUser(UserAuth userAuth) async {
     try {

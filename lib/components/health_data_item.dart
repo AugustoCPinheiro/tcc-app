@@ -5,6 +5,11 @@ import 'package:tcc/util/theme/custom_theme.dart';
 import 'package:tcc/util/theme/theme_colors.dart';
 
 class HealthDataItem extends StatelessWidget {
+  final String label;
+  final String value;
+
+  HealthDataItem({this.label, this.value});
+
   @override
   Widget build(BuildContext context) {
     return CustomCard(
@@ -24,7 +29,7 @@ class HealthDataItem extends StatelessWidget {
             Container(
               margin: EdgeInsets.only(bottom: CustomTheme.getSpacing(2)),
               child: Text(
-                "O2",
+                label,
                 style: TextStyle(color: Colors.white, fontSize: 24.0),
               ),
             ),
@@ -32,10 +37,10 @@ class HealthDataItem extends StatelessWidget {
               padding:
                   EdgeInsets.symmetric(horizontal: CustomTheme.getSpacing(3)),
               child: Text(
-                "99",
+                value,
                 style: TextStyle(
                     color: Colors.white,
-                    fontSize: 40.0,
+                    fontSize: 36.0,
                     fontWeight: FontWeight.bold),
               ),
             )

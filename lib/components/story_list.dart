@@ -11,10 +11,12 @@ class StoryList extends StatelessWidget {
     return SizedBox(
       child: ListView.builder(
         itemBuilder: (context, index) {
-          return Story();
+          return Story(
+            type: StoryType.CHART,
+          );
         },
         scrollDirection: Axis.horizontal,
-        itemCount: 3,
+        itemCount: 1,
       ),
       height: 40.0,
     );

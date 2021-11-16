@@ -9,6 +9,21 @@ class Story extends StatelessWidget {
 
   Story({this.type, this.onTap});
 
+  Icon getIcon() {
+    switch (type) {
+      case StoryType.CHART:
+        return Icon(
+          Icons.bar_chart_sharp,
+          color: Colors.white,
+        );
+      default:
+        return Icon(
+          Icons.info,
+          color: Colors.white,
+        );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return RawMaterialButton(
@@ -29,10 +44,7 @@ class Story extends StatelessWidget {
       constraints: BoxConstraints(minHeight: 40.0, minWidth: 40.0),
       shape: CircleBorder(),
       child: Center(
-        child: Icon(
-          Icons.account_tree_rounded,
-          color: Colors.white,
-        ),
+        child: getIcon(),
       ),
     );
   }
