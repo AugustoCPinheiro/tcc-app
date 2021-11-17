@@ -35,12 +35,12 @@ class HealthDataItem extends StatelessWidget {
             ),
             Container(
               padding:
-                  EdgeInsets.symmetric(horizontal: CustomTheme.getSpacing(3)),
+                  EdgeInsets.symmetric(horizontal: CustomTheme.getSpacing(1)),
               child: Text(
                 value,
                 style: TextStyle(
                     color: Colors.white,
-                    fontSize: 36.0,
+                    fontSize: 32.0,
                     fontWeight: FontWeight.bold),
               ),
             )

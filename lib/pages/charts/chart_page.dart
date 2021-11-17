@@ -30,7 +30,8 @@ class _ChartPageState extends State<ChartPage> {
       buildBPMData(),
       buildSATData(),
       buildSPRData(),
-      buildDPRData()
+      buildDPRData(),
+      buildTEMPData()
     ];
   }
 
@@ -86,9 +87,9 @@ class _ChartPageState extends State<ChartPage> {
             .getRange(widget.health.healthData.length - 150,
                 widget.health.healthData.length)
             .map<TimeChartData>((e) {
-          double sat =
+          double spr =
               e.sysPressure.isNotEmpty ? double.parse(e.sysPressure) : 0.0;
-          return TimeChartData(e.date, sat);
+          return TimeChartData(e.date, spr);
         }).toList());
   }
 
@@ -99,9 +100,22 @@ class _ChartPageState extends State<ChartPage> {
             .getRange(widget.health.healthData.length - 150,
                 widget.health.healthData.length)
             .map<TimeChartData>((e) {
-          double sat =
+          double dpr =
               e.diasPressure.isNotEmpty ? double.parse(e.diasPressure) : 0.0;
-          return TimeChartData(e.date, sat);
+          return TimeChartData(e.date, dpr);
+        }).toList());
+  }
+
+  TimeChartSeries buildTEMPData() {
+    return TimeChartSeries(
+        "TEMP",
+        widget.health.healthData
+            .getRange(widget.health.healthData.length - 150,
+                widget.health.healthData.length)
+            .map<TimeChartData>((e) {
+          double temperature =
+              e.temperature.isNotEmpty ? double.parse(e.temperature) : 0.0;
+          return TimeChartData(e.date, temperature);
         }).toList());
   }
 }

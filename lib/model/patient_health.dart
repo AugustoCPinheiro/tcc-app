@@ -22,16 +22,23 @@ class HealthData {
   String _sat;
   String _sysPressure;
   String _diasPressure;
+  String _temperature;
 
   HealthData.fromJson(Map<String, dynamic> json)
       : _bpm = json["heart_rate"],
         _sat = json["saturation"],
         _sysPressure = json["systolic_pressure"],
         _diasPressure = json["diastolic_pressure"],
-        _date = DateTime.parse(json["date"]);
+        _date = DateTime.parse(json["date"]),
+        _temperature = json["temperature"];
 
-  Map<String, String> toIterable() =>
-      {"BPM": _bpm, "SAT": _sat, "SP": _sysPressure, "DP": _diasPressure};
+  Map<String, String> toIterable() => {
+        "BPM": _bpm,
+        "SAT": _sat,
+        "SP": _sysPressure,
+        "DP": _diasPressure,
+        "TEMP": _temperature.substring(0, _temperature.indexOf(".") + 2)
+      };
 
   String get sat => _sat;
 
@@ -42,4 +49,6 @@ class HealthData {
   String get sysPressure => _sysPressure;
 
   DateTime get date => _date;
+
+  String get temperature => _temperature;
 }
