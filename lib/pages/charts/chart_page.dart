@@ -22,6 +22,18 @@ class ChartPage extends StatefulWidget {
 }
 
 class _ChartPageState extends State<ChartPage> {
+  List<TimeChartSeries> chartData = [];
+  @override
+  void initState() {
+    super.initState();
+    chartData = [
+      buildBPMData(),
+      buildSATData(),
+      buildSPRData(),
+      buildDPRData()
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,8 +49,8 @@ class _ChartPageState extends State<ChartPage> {
             CustomTheme.getSpacing(1),
             CustomTheme.getSpacing(1)),
         child: CustomCard(
-            child: PatientDataTimeSeriesChart(
-                LinearChartDataWrapper([buildBPMData(), buildSATData()]))),
+            child:
+                PatientDataTimeSeriesChart(LinearChartDataWrapper(chartData))),
       ),
     );
   }
@@ -63,6 +75,32 @@ class _ChartPageState extends State<ChartPage> {
                 widget.health.healthData.length)
             .map<TimeChartData>((e) {
           double sat = e.sat.isNotEmpty ? double.parse(e.sat) : 0.0;
+          return TimeChartData(e.date, sat);
+        }).toList());
+  }
+
+  TimeChartSeries buildSPRData() {
+    return TimeChartSeries(
+        "SPR",
+        widget.health.healthData
+            .getRange(widget.health.healthData.length - 150,
+                widget.health.healthData.length)
+            .map<TimeChartData>((e) {
+          double sat =
+              e.sysPressure.isNotEmpty ? double.parse(e.sysPressure) : 0.0;
+          return TimeChartData(e.date, sat);
+        }).toList());
+  }
+
+  TimeChartSeries buildDPRData() {
+    return TimeChartSeries(
+        "DPR",
+        widget.health.healthData
+            .getRange(widget.health.healthData.length - 150,
+                widget.health.healthData.length)
+            .map<TimeChartData>((e) {
+          double sat =
+              e.diasPressure.isNotEmpty ? double.parse(e.diasPressure) : 0.0;
           return TimeChartData(e.date, sat);
         }).toList());
   }
