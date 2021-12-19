@@ -58,13 +58,28 @@ class _ChartPageState extends State<ChartPage> {
     );
   }
 
+  Iterable<E> filterIndexed<E>(
+      Iterable<E> toFilter, bool Function(E, int) filter) {
+    int count = 0;
+    return toFilter
+        .map<E>((e) {
+          bool result = filter(e, count);
+          count++;
+          return result ? e : null;
+        })
+        .toList()
+        .where((element) => element != null)
+        .toList();
+  }
+
+  List<HealthData> filterData(List<HealthData> data) {
+    return filterIndexed(data, (_, index) => index > 450);
+  }
+
   TimeChartSeries buildBPMData() {
     return TimeChartSeries(
         "BPM",
-        widget.health.healthData
-            .getRange(widget.health.healthData.length - 100,
-                widget.health.healthData.length)
-            .map<TimeChartData>((e) {
+        filterData(widget.health.healthData).map<TimeChartData>((e) {
           double bpm = e.bpm.isNotEmpty ? double.parse(e.bpm) : 0.0;
           return TimeChartData(e.date, bpm);
         }).toList());
@@ -73,10 +88,7 @@ class _ChartPageState extends State<ChartPage> {
   TimeChartSeries buildSATData() {
     return TimeChartSeries(
         "SAT",
-        widget.health.healthData
-            .getRange(widget.health.healthData.length - 100,
-                widget.health.healthData.length)
-            .map<TimeChartData>((e) {
+        filterData(widget.health.healthData).map<TimeChartData>((e) {
           double sat = e.sat.isNotEmpty ? double.parse(e.sat) : 0.0;
           return TimeChartData(e.date, sat);
         }).toList());
@@ -85,10 +97,7 @@ class _ChartPageState extends State<ChartPage> {
   TimeChartSeries buildSPRData() {
     return TimeChartSeries(
         "SPR",
-        widget.health.healthData
-            .getRange(widget.health.healthData.length - 100,
-                widget.health.healthData.length)
-            .map<TimeChartData>((e) {
+        filterData(widget.health.healthData).map<TimeChartData>((e) {
           double spr =
               e.sysPressure.isNotEmpty ? double.parse(e.sysPressure) : 0.0;
           return TimeChartData(e.date, spr);
@@ -98,10 +107,7 @@ class _ChartPageState extends State<ChartPage> {
   TimeChartSeries buildDPRData() {
     return TimeChartSeries(
         "DPR",
-        widget.health.healthData
-            .getRange(widget.health.healthData.length - 100,
-                widget.health.healthData.length)
-            .map<TimeChartData>((e) {
+        filterData(widget.health.healthData).map<TimeChartData>((e) {
           double dpr =
               e.diasPressure.isNotEmpty ? double.parse(e.diasPressure) : 0.0;
           return TimeChartData(e.date, dpr);
@@ -111,10 +117,7 @@ class _ChartPageState extends State<ChartPage> {
   TimeChartSeries buildTEMPData() {
     return TimeChartSeries(
         "TEMP",
-        widget.health.healthData
-            .getRange(widget.health.healthData.length - 100,
-                widget.health.healthData.length)
-            .map<TimeChartData>((e) {
+        filterData(widget.health.healthData).map<TimeChartData>((e) {
           double temperature =
               e.temperature.isNotEmpty ? double.parse(e.temperature) : 0.0;
           return TimeChartData(e.date, temperature);
