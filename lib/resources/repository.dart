@@ -26,4 +26,8 @@ class Repository {
       }
     }
   }
+
+  Future<void> registerToken(String token) async {
+    await _authApiProvider.registerToken(token);
+  }
 }

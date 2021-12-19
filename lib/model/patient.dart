@@ -1,8 +1,10 @@
 import 'package:tcc/model/bed_occupation.dart';
+import 'package:tcc/model/patient_health_status.dart';
 
 class Patient {
   String _patientCode;
   String _name;
+  PatientHealthStatus _healthStatus;
   BedOccupation _bedOccupation;
 
   Patient(this._name, this._patientCode, this._bedOccupation);
@@ -10,6 +12,8 @@ class Patient {
   Patient.fromJson(Map<String, dynamic> json)
       : _patientCode = json["patientCode"],
         _name = json["name"],
+        _healthStatus =
+            PatientHealthStatusHelper.fromString(json["patientStatus"]),
         _bedOccupation = BedOccupation.fromJson(json["bedOccupation"]);
 
   Patient.asTest() {
@@ -23,6 +27,8 @@ class Patient {
   String get name => _name;
 
   BedOccupation get bedOccupation => _bedOccupation;
+
+  PatientHealthStatus get healthStatus => _healthStatus;
 
   Map<String, dynamic> toJson() => {
         "patientCode": _patientCode,

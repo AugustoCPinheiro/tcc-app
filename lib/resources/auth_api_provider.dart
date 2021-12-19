@@ -23,4 +23,12 @@ class AuthApiProvider extends BaseApiProvider {
         break;
     }
   }
+
+  Future<void> registerToken(String token) async {
+    print("register token");
+    final response = await client.post(buildUrl("tokens"),
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode({"token": token}));
+    print(response);
+  }
 }

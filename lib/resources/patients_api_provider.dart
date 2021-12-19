@@ -29,7 +29,8 @@ class PatientsApiProvider extends BaseApiProvider {
   }
 
   Future<PatientHealth> fetchPatientDetails(String patientCode) async {
-    final response = await client.get(buildUrl("patientHealth/$patientCode"));
+    final response = await client.get(
+        buildUrl("patientHealth/$patientCode?_embed=admissionHealthStatus"));
 
     switch (response.statusCode) {
       case HttpStatus.OK:

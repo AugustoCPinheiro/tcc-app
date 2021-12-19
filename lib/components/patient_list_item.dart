@@ -16,13 +16,17 @@ class PatientListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(color: Colors.white),
+      decoration: BoxDecoration(
+          color: Colors.white,
+          border: patientStatus == PatientHealthStatus.Normal
+              ? null
+              : Border.all(color: Colors.red)),
       margin: EdgeInsets.only(bottom: CustomTheme.getSpacing(3)),
       child: ListTile(
         subtitle: Text("Leito ${this.subtitle}"),
         onTap: this.onTap,
         leading: patientStatus == PatientHealthStatus.Normal
-            ? Icon(Icons.close)
+            ? null
             : Icon(
                 Icons.announcement_sharp,
                 color: Colors.red,

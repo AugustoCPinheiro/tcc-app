@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tcc/components/patient_list_item.dart';
-import 'package:tcc/model/patient_health_status.dart';
 import 'package:tcc/navigation/app_navigator_bloc.dart';
 import 'package:tcc/navigation/app_navigator_event.dart';
 import 'package:tcc/pages/patients/patients_bloc.dart';
@@ -37,6 +36,7 @@ class _PatientsPageState extends State<PatientsPage> {
                 case PatientsStatus.SUCCESS:
                   return ListView.builder(
                     itemBuilder: (context, index) {
+                      print(state.patients);
                       return PatientListItem(
                         onTap: () {
                           BlocProvider.of<AppNavigatorBloc>(context).add(
@@ -49,7 +49,8 @@ class _PatientsPageState extends State<PatientsPage> {
                             .bedOccupation
                             .bed
                             .code,
-                        patientStatus: PatientHealthStatus.Alert,
+                        patientStatus:
+                            state.patients.elementAt(index).healthStatus,
                       );
                     },
                     itemCount: state.patients.length,

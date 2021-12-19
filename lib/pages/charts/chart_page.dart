@@ -50,8 +50,10 @@ class _ChartPageState extends State<ChartPage> {
             CustomTheme.getSpacing(1),
             CustomTheme.getSpacing(1)),
         child: CustomCard(
-            child:
-                PatientDataTimeSeriesChart(LinearChartDataWrapper(chartData))),
+            child: PatientDataTimeSeriesChart(
+          LinearChartDataWrapper(chartData),
+          isBar: false,
+        )),
       ),
     );
   }
@@ -60,7 +62,7 @@ class _ChartPageState extends State<ChartPage> {
     return TimeChartSeries(
         "BPM",
         widget.health.healthData
-            .getRange(widget.health.healthData.length - 150,
+            .getRange(widget.health.healthData.length - 100,
                 widget.health.healthData.length)
             .map<TimeChartData>((e) {
           double bpm = e.bpm.isNotEmpty ? double.parse(e.bpm) : 0.0;
@@ -72,7 +74,7 @@ class _ChartPageState extends State<ChartPage> {
     return TimeChartSeries(
         "SAT",
         widget.health.healthData
-            .getRange(widget.health.healthData.length - 150,
+            .getRange(widget.health.healthData.length - 100,
                 widget.health.healthData.length)
             .map<TimeChartData>((e) {
           double sat = e.sat.isNotEmpty ? double.parse(e.sat) : 0.0;
@@ -84,7 +86,7 @@ class _ChartPageState extends State<ChartPage> {
     return TimeChartSeries(
         "SPR",
         widget.health.healthData
-            .getRange(widget.health.healthData.length - 150,
+            .getRange(widget.health.healthData.length - 100,
                 widget.health.healthData.length)
             .map<TimeChartData>((e) {
           double spr =
@@ -97,7 +99,7 @@ class _ChartPageState extends State<ChartPage> {
     return TimeChartSeries(
         "DPR",
         widget.health.healthData
-            .getRange(widget.health.healthData.length - 150,
+            .getRange(widget.health.healthData.length - 100,
                 widget.health.healthData.length)
             .map<TimeChartData>((e) {
           double dpr =
@@ -110,7 +112,7 @@ class _ChartPageState extends State<ChartPage> {
     return TimeChartSeries(
         "TEMP",
         widget.health.healthData
-            .getRange(widget.health.healthData.length - 150,
+            .getRange(widget.health.healthData.length - 100,
                 widget.health.healthData.length)
             .map<TimeChartData>((e) {
           double temperature =

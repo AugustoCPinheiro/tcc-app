@@ -5,11 +5,16 @@ import 'package:tcc/model/linear_chart_data.dart';
 import 'package:tcc/model/linear_chart_data_wrapper.dart';
 import 'package:tcc/model/linear_chart_series.dart';
 
+typedef Tap = void Function();
+
 class PatientDataTimeSeriesChart extends StatelessWidget {
   final LinearChartDataWrapper dataWrapper;
   final bool animate;
+  final Tap onTap;
+  final bool isBar;
 
-  PatientDataTimeSeriesChart(this.dataWrapper, {this.animate});
+  PatientDataTimeSeriesChart(this.dataWrapper,
+      {this.animate, this.onTap, this.isBar = false});
 
   /// Creates a [LineChart] with sample data and no transition.
   // factory PatientDataLineChart.withSampleData() {
@@ -31,27 +36,32 @@ class PatientDataTimeSeriesChart extends StatelessWidget {
           child: ListView.builder(
             itemCount: dataWrapper.dataSeries.length,
             scrollDirection: Axis.horizontal,
-            padding: EdgeInsets.only(left: 10.0),
             itemBuilder: (context, index) {
-              return Flex(
-                direction: Axis.horizontal,
-                children: [
-                  Container(
-                    height: 10,
-                    width: 10,
-                    decoration: BoxDecoration(
-                      color: getSubtitleColorByIndex(index),
+              return Padding(
+                padding: EdgeInsets.only(left: 10.0),
+                child: Flex(
+                  direction: Axis.horizontal,
+                  children: [
+                    Container(
+                      height: 10,
+                      width: 10,
+                      decoration: BoxDecoration(
+                        color: getSubtitleColorByIndex(index),
+                      ),
                     ),
-                  ),
-                  Text(dataWrapper.dataSeries[index].id)
-                ],
+                    Padding(
+                      padding: EdgeInsets.only(left: 3.0),
+                      child: Text(dataWrapper.dataSeries[index].id),
+                    )
+                  ],
+                ),
               );
             },
           ),
           height: 30,
         ),
         SizedBox(
-          height: MediaQuery.of(context).size.height / 1.5,
+          height: MediaQuery.of(context).size.height / 1.3,
           child: charts.TimeSeriesChart(
             dataWrapper.dataSeries
                 .map<charts.Series<TimeChartData, DateTime>>(
@@ -59,6 +69,9 @@ class PatientDataTimeSeriesChart extends StatelessWidget {
                 .toList(),
             animate: animate,
             behaviors: [charts.PanAndZoomBehavior()],
+            defaultRenderer: isBar
+                ? charts.BarRendererConfig()
+                : charts.LineRendererConfig(),
             primaryMeasureAxis: charts.NumericAxisSpec(
                 tickProviderSpec: charts.BasicNumericTickProviderSpec(
                     desiredTickCount: 25,

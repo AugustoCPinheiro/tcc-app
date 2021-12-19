@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:tcc/components/custom_card.dart';
 import 'package:tcc/components/health_data_item.dart';
+import 'package:tcc/components/labeled_data.dart';
 import 'package:tcc/components/page_body_container.dart';
 import 'package:tcc/components/patient_profile.dart';
 import 'package:tcc/components/story.dart';
@@ -50,7 +52,7 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     PatientProfile(
-                      name: widget.patient.name,
+                      patient: widget.patient,
                     ),
                     BlocBuilder<PatientDetailsBloc, PatientDetailsState>(
                         builder: (context, state) {
@@ -70,7 +72,7 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
                                 padding: EdgeInsets.only(
                                     bottom: CustomTheme.getSpacing(2)),
                                 child: Text(
-                                  "Monitoramento: ",
+                                  "Ultimo registro: ${state.patientHealth.diseases.first}",
                                 )),
                             Padding(
                               padding: EdgeInsets.only(
@@ -86,6 +88,14 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
                                 )
                               ]),
                             ),
+                            Padding(
+                                padding: EdgeInsets.only(
+                                    bottom: CustomTheme.getSpacing(2)),
+                                child: LabeledData(
+                                    label: "Data",
+                                    text: DateFormat.yMMMd().add_jm().format(
+                                        state.patientHealth.healthData.last
+                                            .date))),
                             GridView.builder(
                                 physics: ScrollPhysics(),
                                 gridDelegate:

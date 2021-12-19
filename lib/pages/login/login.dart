@@ -77,14 +77,14 @@ class _LoginState extends State<Login> {
                             Padding(
                                 padding: EdgeInsets.only(
                                     top: CustomTheme.getSpacing(2)),
-                                child: ElevatedButton(
-                                    onPressed: isFormFilled()
-                                        ? () =>
-                                            _onElevatedButtonPressed(context)
-                                        : null,
-                                    child: state.status == LoginStatus.LOADING
-                                        ? CircularProgressIndicator()
-                                        : Text(Strings.LOGIN_BUTTON))),
+                                child: state.status == LoginStatus.LOADING
+                                    ? CircularProgressIndicator()
+                                    : ElevatedButton(
+                                        onPressed: isFormFilled()
+                                            ? () => _onElevatedButtonPressed(
+                                                context)
+                                            : null,
+                                        child: Text(Strings.LOGIN_BUTTON))),
                           ],
                         ),
                       ),

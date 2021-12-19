@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tcc/navigation/app_navigator_bloc.dart';
+import 'package:tcc/navigation/app_navigator_event.dart';
 import 'package:tcc/util/strings/strings.dart';
 import 'package:tcc/util/theme/custom_theme.dart';
 import 'package:tcc/util/theme/theme_colors.dart';
@@ -13,7 +16,7 @@ class ConfigurationsPage extends StatelessWidget {
         padding: EdgeInsets.only(bottom: CustomTheme.getSpacing(2)),
         child: ElevatedButton(
             onPressed: () {
-              Navigator.pushNamed(context, "login");
+              BlocProvider.of<AppNavigatorBloc>(context).add(LoginCalled());
             },
             style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(ThemeColors.RED)),

@@ -1,19 +1,28 @@
+import 'package:tcc/model/admission_health_status.dart';
+import 'package:tcc/model/disease.dart';
+
 class PatientHealth {
   String _dataType;
   String _patientCode;
   List<HealthData> _healthData;
+  List<Disease> _diseases;
 
   PatientHealth.fromJson(Map<String, dynamic> json)
       : _dataType = json["dataType"],
         _patientCode = json["patientCode"],
         _healthData = List.from((json["healthData"] as List)
-            .map<HealthData>((e) => HealthData.fromJson(e)));
+            .map<HealthData>((e) => HealthData.fromJson(e))),
+        _diseases = AdmissionHealthStatus.fromJson(
+                (json["admissionHealthStatus"] as List).first)
+            .diseases;
 
   String get patientCode => _patientCode;
 
   List<HealthData> get healthData => _healthData;
 
   String get dataType => _dataType;
+
+  List<Disease> get diseases => _diseases;
 }
 
 class HealthData {
@@ -51,4 +60,6 @@ class HealthData {
   DateTime get date => _date;
 
   String get temperature => _temperature;
+
+
 }
