@@ -24,6 +24,7 @@ class Repository {
       if (e is BadRequestError) {
         return false;
       }
+      return false;
     }
   }
 

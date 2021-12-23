@@ -9,6 +9,7 @@ import 'package:tcc/components/page_body_container.dart';
 import 'package:tcc/components/patient_profile.dart';
 import 'package:tcc/components/story.dart';
 import 'package:tcc/components/story_list.dart';
+import 'package:tcc/model/disease.dart';
 import 'package:tcc/model/patient.dart';
 import 'package:tcc/navigation/app_navigator_bloc.dart';
 import 'package:tcc/navigation/app_navigator_event.dart';
@@ -68,11 +69,20 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            LabeledData(
+                              label: "Histórico de doenças",
+                              text: state.patientHealth.diseases
+                                  .map<String>((e) =>
+                                      DiseaseStatusHelper.diseaseToString(e))
+                                  .toList()
+                                  .join(", "),
+                            ),
                             Padding(
                                 padding: EdgeInsets.only(
-                                    bottom: CustomTheme.getSpacing(2)),
+                                    bottom: CustomTheme.getSpacing(2),
+                                    top: CustomTheme.getSpacing(4)),
                                 child: Text(
-                                  "Ultimo registro: ${state.patientHealth.diseases.first}",
+                                  "Ultimo registro: ",
                                 )),
                             Padding(
                               padding: EdgeInsets.only(

@@ -18,8 +18,8 @@ class PatientProfile extends StatelessWidget {
           image: NetworkImage(
               "https://i.pinimg.com/originals/b4/00/85/b400851a6b07f8877a9236f275bd8d4f.jpg"),
           placeholder: AssetImage("assets/images/img.png"),
-          width: 180,
-          height: 180,
+          width: 100,
+          height: 100,
         ),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: CustomTheme.getSpacing(2)),

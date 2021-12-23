@@ -73,7 +73,7 @@ class _ChartPageState extends State<ChartPage> {
   }
 
   List<HealthData> filterData(List<HealthData> data) {
-    return filterIndexed(data, (_, index) => index > 450);
+    return filterIndexed(data.reversed, (_, index) => index <= 100);
   }
 
   TimeChartSeries buildBPMData() {

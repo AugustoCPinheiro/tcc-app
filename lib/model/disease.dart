@@ -11,4 +11,15 @@ class DiseaseStatusHelper {
 
     return Disease.NONE;
   }
+
+  static String diseaseToString(Disease disease) {
+    switch (disease) {
+      case Disease.DIABETES:
+        return "Diabetes";
+      case Disease.ASMA:
+        return "Asma";
+    }
+
+    return "";
+  }
 }

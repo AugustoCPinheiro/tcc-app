@@ -60,6 +60,4 @@ class HealthData {
   DateTime get date => _date;
 
   String get temperature => _temperature;
-
-
 }

@@ -40,7 +40,7 @@ class HealthDataItem extends StatelessWidget {
                 value,
                 style: TextStyle(
                     color: Colors.white,
-                    fontSize: 32.0,
+                    fontSize: 26.0,
                     fontWeight: FontWeight.bold),
               ),
             )
