@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tcc/components/patient_list_item.dart';
+import 'package:tcc/model/patient.dart';
 import 'package:tcc/navigation/app_navigator_bloc.dart';
 import 'package:tcc/navigation/app_navigator_event.dart';
 import 'package:tcc/pages/patients/patients_bloc.dart';
@@ -18,6 +19,8 @@ class PatientsPage extends StatefulWidget {
 }
 
 class _PatientsPageState extends State<PatientsPage> {
+  List<Patient> _patients = [];
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -34,27 +37,32 @@ class _PatientsPageState extends State<PatientsPage> {
                     backgroundColor: CustomTheme.getColor(ThemeColors.RED),
                   ));
                 case PatientsStatus.SUCCESS:
-                  return ListView.builder(
-                    itemBuilder: (context, index) {
-                      print(state.patients);
-                      return PatientListItem(
-                        onTap: () {
-                          BlocProvider.of<AppNavigatorBloc>(context).add(
-                              PatientDetailsCalled(
-                                  state.patients.elementAt(index)));
+                  return RefreshIndicator(
+                      child: ListView.builder(
+                        itemBuilder: (context, index) {
+                          print(_patients);
+                          return PatientListItem(
+                            onTap: () {
+                              BlocProvider.of<AppNavigatorBloc>(context).add(
+                                  PatientDetailsCalled(
+                                      _patients.elementAt(index)));
+                            },
+                            title: _patients.elementAt(index).name,
+                            subtitle: _patients
+                                .elementAt(index)
+                                .bedOccupation
+                                .bed
+                                .code,
+                            patientStatus:
+                                _patients.elementAt(index).healthStatus,
+                          );
                         },
-                        title: state.patients.elementAt(index).name,
-                        subtitle: state.patients
-                            .elementAt(index)
-                            .bedOccupation
-                            .bed
-                            .code,
-                        patientStatus:
-                            state.patients.elementAt(index).healthStatus,
-                      );
-                    },
-                    itemCount: state.patients.length,
-                  );
+                        itemCount: _patients.length,
+                      ),
+                      onRefresh: () async {
+                        BlocProvider.of<PatientsBloc>(context)
+                            .add(PatientsFetched());
+                      });
 
                 case PatientsStatus.EMPTY:
                   return Center(
@@ -72,6 +80,11 @@ class _PatientsPageState extends State<PatientsPage> {
             },
           ),
           listener: (context, state) {
+            if (state.status == PatientsStatus.SUCCESS) {
+              setState(() {
+                _patients = state.patients;
+              });
+            }
             if (state.status == PatientsStatus.FAILURE) {
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                 backgroundColor: CustomTheme.getColor(ThemeColors.RED),
