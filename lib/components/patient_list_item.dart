@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:tcc/components/blinking_icon.dart';
 import 'package:tcc/model/patient_health_status.dart';
 import 'package:tcc/util/theme/custom_theme.dart';
 
@@ -27,10 +28,7 @@ class PatientListItem extends StatelessWidget {
         onTap: this.onTap,
         leading: patientStatus == PatientHealthStatus.Normal
             ? null
-            : Icon(
-                Icons.announcement_sharp,
-                color: Colors.red,
-              ),
+            : BlinkingIcon(Icons.announcement_sharp),
         title: Text(title),
       ),
     );

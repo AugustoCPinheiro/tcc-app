@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:bloc/bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -59,7 +61,6 @@ class AppState extends State<MyApp> {
 
     FirebaseMessaging.instance.getToken().then((value) {
       Repository().registerToken(value);
-      print(value);
     });
     FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
       alert: true, // Required to display a heads up notification
@@ -77,7 +78,11 @@ class AppState extends State<MyApp> {
             notification.body,
             NotificationDetails(
                 android: AndroidNotificationDetails(channel.id, channel.name,
-                    channelDescription: channel.description)));
+                    channelDescription: channel.description,
+                    importance: Importance.max,
+                    priority: Priority.max,
+                    ticker: 'ticker',
+                    additionalFlags: Int32List.fromList(<int>[4]))));
       }
       print(event.data);
     });

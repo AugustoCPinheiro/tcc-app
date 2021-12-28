@@ -18,7 +18,7 @@ class Story extends StatelessWidget {
         );
       default:
         return Icon(
-          Icons.info,
+          Icons.volume_off,
           color: Colors.white,
         );
     }
@@ -28,13 +28,6 @@ class Story extends StatelessWidget {
   Widget build(BuildContext context) {
     return RawMaterialButton(
       onPressed: () {
-        // switch (type) {
-        //   case StoryType.CHART:
-        //     print("add chart page");
-        //     break;
-        //   default:
-        //     throw Exception("Untreated case");
-        // }
         if (onTap != null) {
           onTap();
         }
@@ -50,4 +43,4 @@ class Story extends StatelessWidget {
   }
 }
 
-enum StoryType { CHART }
+enum StoryType { CHART, ALERT }

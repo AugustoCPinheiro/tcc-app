@@ -11,11 +11,13 @@ import 'package:tcc/components/story.dart';
 import 'package:tcc/components/story_list.dart';
 import 'package:tcc/model/disease.dart';
 import 'package:tcc/model/patient.dart';
+import 'package:tcc/model/patient_health_status.dart';
 import 'package:tcc/navigation/app_navigator_bloc.dart';
 import 'package:tcc/navigation/app_navigator_event.dart';
 import 'package:tcc/pages/patient_details/patient_details_bloc.dart';
 import 'package:tcc/pages/patient_details/patient_details_event.dart';
 import 'package:tcc/pages/patient_details/patient_details_state.dart';
+import 'package:tcc/resources/repository.dart';
 import 'package:tcc/util/theme/custom_theme.dart';
 import 'package:tcc/util/theme/theme_colors.dart';
 
@@ -31,6 +33,15 @@ class PatientDetailsPage extends StatefulWidget {
 }
 
 class _PatientDetailsPageState extends State<PatientDetailsPage> {
+  bool shouldShowAlert = false;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    shouldShowAlert = widget.patient.healthStatus == PatientHealthStatus.Alert;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -95,7 +106,19 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
                                         .add(ChartsPageCalled(widget.patient,
                                             state.patientHealth));
                                   },
-                                )
+                                ),
+                                shouldShowAlert
+                                    ? Story(
+                                        type: StoryType.ALERT,
+                                        onTap: () {
+                                          setState(() {
+                                            shouldShowAlert = false;
+                                          });
+                                          Repository().turnOffAlert(
+                                              widget.patient.patientCode);
+                                        },
+                                      )
+                                    : null,
                               ]),
                             ),
                             Padding(

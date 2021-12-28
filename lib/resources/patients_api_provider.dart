@@ -50,4 +50,9 @@ class PatientsApiProvider extends BaseApiProvider {
         throw Exception("Untreated http verb");
     }
   }
+
+  Future<void> patchAlertPatient(String patientCode) async {
+    await client.patch(buildUrl("patients/$patientCode"),
+        body: {"patientStatus": "NORM"});
+  }
 }

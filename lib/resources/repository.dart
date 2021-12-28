@@ -31,4 +31,8 @@ class Repository {
   Future<void> registerToken(String token) async {
     await _authApiProvider.registerToken(token);
   }
+
+  Future<void> turnOffAlert(String patientCode) async {
+    await _patientsApiProvider.patchAlertPatient(patientCode);
+  }
 }
