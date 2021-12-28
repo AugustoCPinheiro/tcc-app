@@ -98,7 +98,14 @@ class PatientDataTimeSeriesChart extends StatelessWidget {
   }
 
   String getColorByIndex(int index) {
-    return ["#FF0000", "#0000FF", "#00FF00", "#00C5FF", "#549B52"][index];
+    return [
+      "#FF0000",
+      "#0000FF",
+      "#00FF00",
+      "#00C5FF",
+      "#549B52",
+      "#FFFF00"
+    ][index];
   }
 
   charts.Color getChartColorByIndex(int index) {

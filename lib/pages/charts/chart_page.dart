@@ -31,7 +31,8 @@ class _ChartPageState extends State<ChartPage> {
       buildSATData(),
       buildSPRData(),
       buildDPRData(),
-      buildTEMPData()
+      buildTEMPData(),
+      buildRPMData()
     ];
   }
 
@@ -121,6 +122,15 @@ class _ChartPageState extends State<ChartPage> {
           double temperature =
               e.temperature.isNotEmpty ? double.parse(e.temperature) : 0.0;
           return TimeChartData(e.date, temperature);
+        }).toList());
+  }
+
+  TimeChartSeries buildRPMData() {
+    return TimeChartSeries(
+        "RPM",
+        filterData(widget.health.healthData).map<TimeChartData>((e) {
+          double rpm = e.rpm.isNotEmpty ? double.parse(e.rpm) : 0.0;
+          return TimeChartData(e.date, rpm);
         }).toList());
   }
 }
