@@ -27,6 +27,11 @@ class PatientsBloc extends Bloc<PatientsEvent, PatientsState> {
         return state.copyWith(status: PatientsStatus.EMPTY, patients: patients);
       }
       patientPersistence.saveAll(patients);
+      patients.sort((patientA, patientB) {
+        return int.parse(patientA.bedOccupation.bed.code) -
+            int.parse(patientB.bedOccupation.bed.code);
+      });
+
       return state.copyWith(status: PatientsStatus.SUCCESS, patients: patients);
     } catch (e) {
       return state.copyWith(status: PatientsStatus.FAILURE);

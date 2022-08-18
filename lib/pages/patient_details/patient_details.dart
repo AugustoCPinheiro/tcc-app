@@ -37,7 +37,6 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     shouldShowAlert = widget.patient.healthStatus == PatientHealthStatus.Alert;
   }
@@ -111,11 +110,7 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
                                     ? Story(
                                         type: StoryType.ALERT,
                                         onTap: () {
-                                          setState(() {
-                                            shouldShowAlert = false;
-                                          });
-                                          Repository().turnOffAlert(
-                                              widget.patient.patientCode);
+                                          _showDialog();
                                         },
                                       )
                                     : null,
@@ -162,5 +157,59 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
         ),
       ),
     );
+  }
+
+  void _showDialog() {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text("Alerta"),
+            content: Text("Tem certeza que quer desativar o alarme?"),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text("Não")),
+              TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    _showJustificationDialog();
+                  },
+                  child: Text("Sim"))
+            ],
+          );
+        });
+  }
+
+  void _showJustificationDialog() {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text("Justifique o motivo"),
+            content: TextField(
+              maxLines: null,
+              keyboardType: TextInputType.multiline,
+            ),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text("Cancelar")),
+              TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    setState(() {
+                      shouldShowAlert = false;
+                    });
+                    Repository().turnOffAlert(widget.patient.patientCode);
+                  },
+                  child: Text("Enviar"))
+            ],
+          );
+        });
   }
 }

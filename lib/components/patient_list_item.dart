@@ -22,7 +22,7 @@ class PatientListItem extends StatelessWidget {
           border: patientStatus == PatientHealthStatus.Normal
               ? null
               : Border.all(color: Colors.red)),
-      margin: EdgeInsets.only(bottom: CustomTheme.getSpacing(3)),
+      margin: EdgeInsets.only(bottom: CustomTheme.getSpacing(1)),
       child: ListTile(
         subtitle: Text("Leito ${this.subtitle}"),
         onTap: this.onTap,
